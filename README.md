@@ -1,6 +1,6 @@
-# Forked from git clone https://github.com/KieranQuinn/dwm.git
-# Then Applied cycle and push patch (modified from jasonwryan's 
-# bitbucket to patch on this dwm set.
+Forked from git clone https://github.com/KieranQuinn/dwm.git
+Then Applied cycle and push patch (modified from jasonwryan's 
+bitbucket to patch on this dwm set.
 
 Requirements
 ------------
