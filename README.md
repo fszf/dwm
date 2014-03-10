@@ -1,6 +1,6 @@
-Forked from git clone https://github.com/KieranQuinn/dwm.git
-Then Applied cycle and push patch (modified from jasonwryan's 
-bitbucket to patch on this dwm set.
+# Taken from git clone https://github.com/KieranQuinn/dwm.git
+# Then Applied cycle and push patch (modified from jasonwryan's 
+# bitbucket to patch on this dwm set.
 
 Requirements
 ------------
@@ -10,7 +10,7 @@ Requirements
 Instructions
 ------------
 
-    git clone https://github.com/frank604/dwm.git
+    git clone https://github.com/KieranQuinn/dwm.git
     cd dwm && sudo make clean install
     
     
@@ -31,9 +31,19 @@ Patches/Features
 * Push
 * Cycle
 
+New/Fixes
+---
+* re-wrote drawbar
+* selected tag underline (configurable via config.h)
+* tag spacing & padding (configurable via config.h)
+* bstack horizonal gaps
     
+To do
+-----
+* monocle gaps?
+* fix monocle to tile layout/resizing
     
 Screenshot
 ----------
 
-![Screenshot](screenshot.png "current dwm")
+![Screenshot](screenshot.png "my dwm")

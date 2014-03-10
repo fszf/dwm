@@ -1,0 +1,45 @@
+diff --git a/dwm.c b/dwm.c
+index 8b67cea..3a6c9ef 100644
+--- a/dwm.c
++++ b/dwm.c
+@@ -254,6 +254,9 @@ static int xerror(Display *dpy, XErrorEvent *ee);
+ static int xerrordummy(Display *dpy, XErrorEvent *ee);
+ static int xerrorstart(Display *dpy, XErrorEvent *ee);
+ static void zoom(const Arg *arg);
++static void cycle(const Arg *arg);
++static int shifttag(int dist);
++static void tagcycle(const Arg *arg);
+ static void bstack(Monitor *m);
+ static void runorraise(const Arg *arg);
+
+@@ -2167,6 +2170,30 @@ zoom(const Arg *arg) {
+     spawn(arg);
+ }
+
++shifttag(int dist) {
++   int seltags = selmon->tagset[selmon->seltags] & TAGMASK;
++
++   if(dist > 0) // left circular shift
++       seltags = (seltags << dist) | (seltags >> (LENGTH(tags) - dist));
++   else // right circular shift
++       seltags = (seltags >> (- dist)) | (seltags << (LENGTH(tags) + dist));
++
++   return seltags;
++}
++
++void
++cycle(const Arg *arg) {
++   const Arg a = { .i = shifttag(arg->i) };
++   view(&a);
++}
++
++void
++tagcycle(const Arg *arg) {
++   const Arg a = { .i = shifttag(arg->i) };
++   tag(&a);
++   view(&a);
++}
++
+ int main(int argc, char *argv[]) {
+     if(argc == 2 && !strcmp("-v", argv[1]))
+         die("dwm-"VERSION", © 2006-2011 dwm engineers, see LICENSE for details\n");   

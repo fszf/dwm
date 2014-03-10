@@ -81,29 +81,31 @@ static const char *term[] = { "termite", NULL,  };
 static const char   *mailcmd[] = { "termite", "--name=mutt", "-e", "mutt", NULL };
 static const char   *tmuxcmd[] = { "termite", "--name=tmux", "-e", "tmux", NULL };
 static const char   *yt[] = { "termite", "--name=YouTube", "-e", "youtube-viewer", NULL };
+static const char *fz[] = { "filezilla", NULL,  };
 
 
 static Key keys[] = {
     { MODKEY,           XK_p,       spawn,          {.v = menu } },
-    { MODKEY|ShiftMask, XK_w,       spawn,     {.v = webb } },
-    { MODKEY|ShiftMask, XK_Return,  runorraise,     {.v = term } },
+    { MODKEY|ShiftMask, XK_w,       runorraise,          {.v = webb } },
+    { MODKEY|ShiftMask, XK_Return,  spawn,     {.v = term } },
     { MODKEY|ShiftMask, XK_f,       runorraise,     {.v = file } },
     { MODKEY|ShiftMask, XK_t,       runorraise,     {.v = tmuxcmd } },
     { MODKEY|ShiftMask, XK_m,       runorraise,     {.v = mailcmd } },
     { MODKEY|ShiftMask, XK_y,       runorraise,     {.v = yt } },
+    { MODKEY|ShiftMask, XK_z,       runorraise,     {.v = fz } },
     { MODKEY|ShiftMask, XK_q,       quit,           {0} },
     { MODKEY|ShiftMask, XK_b,       togglebar,      {0} },
     { MODKEY|ShiftMask, XK_c,       killclient,     {0} },
     { MODKEY,           XK_Return,  zoom,           {0} },
     { MODKEY,           XK_Tab,     view,           {0} },
-    { MODKEY|ShiftMask, XK_f,       togglefloating, {0} },
+    { MODKEY|ControlMask,           XK_f, togglefloating, {0} },
     { MODKEY,           XK_space,   setlayout,      {0} },
     { MODKEY,           XK_t,       setlayout,      {.v = &layouts[0] } },
     { MODKEY,           XK_b,       setlayout,      {.v = &layouts[1] } },
     { MODKEY,           XK_m,       setlayout,      {.v = &layouts[2] } },
     { MODKEY,           XK_f,       setlayout,      {.v = &layouts[3] } },
-    { MODKEY,           XK_j,   focusstack,     {.i = +1 } },
-    { MODKEY,           XK_k,    focusstack,     {.i = -1 } },
+    { MODKEY,           XK_j,       focusstack,     {.i = +1 } },
+    { MODKEY,           XK_k,       focusstack,     {.i = -1 } },
     { MODKEY,           XK_h,       setmfact,       {.f = -0.05 } },
     { MODKEY,           XK_l,       setmfact,       {.f = +0.05 } },
     { MODKEY,           XK_equal,   incnmaster,     {.i = +1 } },

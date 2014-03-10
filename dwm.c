@@ -2323,7 +2323,8 @@ void togglefloating(const Arg *arg) {
 }
 
 void runorraise(const Arg *arg) {                                                      
-     const char **app = arg->v;                                               
+     char **app = ((char **)arg->v);
+     /*char *app = ((char **)arg->v)[4];*/
      Arg a = { .ui = ~0 };                                                   
      Monitor *mon;                                               
      Client *c;                  
@@ -2342,7 +2343,7 @@ void runorraise(const Arg *arg) {
      spawn(arg);                                    
 }
 
-shifttag(int dist) {
+int shifttag(int dist) {
    int seltags = selmon->tagset[selmon->seltags] & TAGMASK;
 
    if(dist > 0) // left circular shift
