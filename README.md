@@ -14,7 +14,7 @@ Requirements
 Instructions
 ------------
 
-    git clone https://github.com/KieranQuinn/dwm.git
+    git clone https://github.com/frank604/dwm
     cd dwm && sudo make clean install
     
     
