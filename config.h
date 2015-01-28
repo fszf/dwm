@@ -11,7 +11,7 @@ static const unsigned int tagpadding = 5;      /* inner padding of tags */
 static const unsigned int taglinepx = 2;        /* height of tag underline */
 static const unsigned int systrayspacing = 1;   /* systray spacing */
 static const Bool showsystray = True;           /* false means no systray */
-static const unsigned int gappx = 8;            /* gaps between windows */
+static const unsigned int gappx = 0;            /* gaps between windows */
 static const unsigned int borderpx = 1;         /* border pixel of windows */
 static const unsigned int snap = 32;            /* snap pixel */
 static const Bool showbar = True;               /* false means no bar */
@@ -24,11 +24,11 @@ static const char font[] = "-*-tamsynmod-medium-r-*-*-18-*-*-*-*-*-*-*";
 static const char colors[NUMCOLORS][ColLast][13] = {
     /* border    fg         bg */
     { "#2D2D2D", "#FFFFFF", "#2D2D2D" },        /* 01 - regular */
-    { "#4d79ff", "#FFFFFF", "#2D2D2D" },        /* 02 - selected */
+    { "#2aa198", "#FFFFFF", "#2D2D2D" },        /* 02 - selected */
     { "#2D2D2D", "#FF0000", "#2D2D2D" },        /* 03 - urgent */
     { "#2D2D2D", "#666666", "#2D2D2D" },        /* 04 - occupied */
     { "#2D2D2D", "#A82222", "#2D2D2D" },        /* 05 - red */
-    { "#2D2D2D", "#4779b3", "#2D2D2D" },        /* 06 - blue */
+    { "#2D2D2D", "#268bd2", "#2D2D2D" },        /* 06 - blue 4779b3*/
     { "#2D2D2D", "#349147", "#2D2D2D" },        /* 07 - green */
     { "#2D2D2D", "#666666", "#2D2D2D" },        /* 08 - dark grey */
     { "#2D2D2D", "#DCDCDC", "#2D2D2D" },        /* 09 - light grey */
@@ -51,7 +51,7 @@ static const Tag tags[] = {
     { "web",    &layouts[0],    -1,     -1 },
     { "term",   &layouts[0],    -1,     -1 },
     { "media",  &layouts[3],    -1,     -1 },
-    { "steam",  &layouts[0],    -1,     -1 },
+    { "work",   &layouts[0],    -1,     -1 },
     { "mail",   &layouts[0],    -1,     -1 },
     { "misc",   &layouts[0],    -1,     -1 },
 };
@@ -62,7 +62,7 @@ static const Rule rules[] = {
    { "Filezilla",   NULL,       NULL,       1 << 0,       True,  True,       -1 },
    { "Spacefm",     NULL,       NULL,       0,            True,  True,       -1 },
    { "Truecrypt",   NULL,       NULL,       0,            True,  True,       -1 },
-   { "Dwb",         NULL,       NULL,       1 << 0,       False, False,      -1 },
+   { "Firefox",     NULL,       NULL,       1 << 0,       False, False,      -1 },
    { "Steam",       NULL,       NULL,       1 << 3,       False, True,       -1 },
    { "Gimp",        NULL,       NULL,       0,            True,  True,       -1 },
    {  NULL,         "mutt",     NULL,       1 << 4,       False, False,       -1 },
@@ -75,12 +75,13 @@ static const Rule rules[] = {
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 static const char *menu[] = { "dmenu_run", "-i", "-fn", font, "-nb", colors[0][ColBG], "-nf", colors[0][ColFG], "-sb", colors[1][ColBG], "-sf", colors[9][ColFG], NULL };
-static const char *webb[] = { "dwb", NULL, "Dwb" };
+static const char *webb[] = { "firefox", NULL, "Firefox" };
 static const char *file[] = { "pcmanfm", NULL, "Pcmanfm" };
-static const char *term[] = { "termite", NULL,  };
+/*static const char *term[] = { "termite", NULL,  };*/
 static const char   *mailcmd[] = { "termite", "--name=mutt", "-e", "mutt", NULL };
 static const char   *tmuxcmd[] = { "termite", "--name=tmux", "-e", "tmux", NULL };
 static const char   *yt[] = { "termite", "--name=YouTube", "-e", "youtube-viewer", NULL };
+static const char *term[] = { "urxvtc", NULL, };
 static const char *fz[] = { "filezilla", NULL,  };
 
 
