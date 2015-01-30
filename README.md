@@ -17,7 +17,13 @@ Instructions
     git clone https://github.com/KieranQuinn/dwm.git
     cd dwm && sudo make clean install
     
-    
+Status Bar
+----------
+
+    You will need dwm-start and dwm-statusbar from my scripts repo.
+    In ~/.xinitrc:
+    exec $HOME/path/to/script/dwm-start
+
 Patches/Features
 ----------------
 * statuscolors
