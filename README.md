@@ -35,4 +35,4 @@ Patches/Features
 * Push
 * Cycle
 
-![Screenshot](screenshot.png "my dwm")
+![Screenshot](newscreenshot.png "my dwm")
