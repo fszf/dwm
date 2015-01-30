@@ -50,25 +50,24 @@ static const Tag tags[] = {
     /* name     layout          mfact   nmaster */
     { "web",    &layouts[0],    -1,     -1 },
     { "term",   &layouts[0],    -1,     -1 },
-    { "media",  &layouts[3],    -1,     -1 },
-    { "work",   &layouts[0],    -1,     -1 },
-    { "mail",   &layouts[0],    -1,     -1 },
+    { "media",  &layouts[1],    -1,     -1 },
     { "misc",   &layouts[0],    -1,     -1 },
+    { "mail",   &layouts[0],    -1,     -1 },
 };
 
 static const Rule rules[] = {
     /* class        instance    title       tags mask     isfloating      iscentred       monitor */
    { "Chromium",    NULL,       NULL,       1 << 0,       False, True,       -1 },
-   { "Filezilla",   NULL,       NULL,       1 << 0,       True,  True,       -1 },
+   { "Filezilla",   NULL,       NULL,       1 << 3,       False, False,       -1 },
    { "Spacefm",     NULL,       NULL,       0,            True,  True,       -1 },
    { "Truecrypt",   NULL,       NULL,       0,            True,  True,       -1 },
    { "Firefox",     NULL,       NULL,       1 << 0,       False, False,      -1 },
    { "Steam",       NULL,       NULL,       1 << 3,       False, True,       -1 },
    { "Gimp",        NULL,       NULL,       0,            True,  True,       -1 },
-   {  NULL,         "mutt",     NULL,       1 << 4,       False, False,       -1 },
-   {  NULL,         "tmux",     NULL,       1 << 1,       False, False,       -1 },
-   {  NULL,         "YouTube",  NULL,       1 << 2,       True, True,       -1 },
-   { "mpv",         NULL,       NULL,       0,            True,  True,       -1 },
+   {  NULL,         NULL,     "mutt",       1 << 4,       False, False,       -1 },
+   {  NULL,         NULL,     "tmux",       1 << 1,       False, False,       -1 },
+   {  NULL,         NULL,  "YouTube",       1 << 2,       False, False,       -1 },
+   { "mpv",         NULL,       NULL,       1 << 2,            False,  False,       -1 },
 };
 
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
@@ -77,10 +76,9 @@ static const Rule rules[] = {
 static const char *menu[] = { "dmenu_run", "-i", "-fn", font, "-nb", colors[0][ColBG], "-nf", colors[0][ColFG], "-sb", colors[1][ColBG], "-sf", colors[9][ColFG], NULL };
 static const char *webb[] = { "firefox", NULL, "Firefox" };
 static const char *file[] = { "pcmanfm", NULL, "Pcmanfm" };
-/*static const char *term[] = { "termite", NULL,  };*/
-static const char   *mailcmd[] = { "termite", "--name=mutt", "-e", "mutt", NULL };
-static const char   *tmuxcmd[] = { "termite", "--name=tmux", "-e", "tmux", NULL };
-static const char   *yt[] = { "termite", "--name=YouTube", "-e", "youtube-viewer", NULL };
+static const char   *mailcmd[] = { "urxvtc", "-title", "mutt", "-e", "mutt", NULL };
+static const char   *tmuxcmd[] = { "urxvtc", "-title", "tmux", "-e", "tmux", NULL };
+static const char   *yt[] = { "urxvtc", "-title", "YouTube" "-e", "youtube-viewer", NULL };
 static const char *term[] = { "urxvtc", NULL, };
 static const char *fz[] = { "filezilla", NULL,  };
 
