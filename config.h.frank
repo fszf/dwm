@@ -6,31 +6,29 @@
     { MODKEY|ShiftMask,             KEY,      tag,            {.ui = 1 << TAG} }, \
     { MODKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} },
     
-static const unsigned int tagspacing = 0;       /* space between tags */
-static const unsigned int tagpadding = 1;      /* inner padding of tags */
-static const unsigned int taglinepx = 3;        /* height of tag underline */
+static const unsigned int tagspacing = 1;       /* space between tags */
+static const unsigned int tagpadding = 5;      /* inner padding of tags */
+static const unsigned int taglinepx = 2;        /* height of tag underline */
 static const unsigned int systrayspacing = 1;   /* systray spacing */
 static const Bool showsystray = True;           /* false means no systray */
 static const unsigned int gappx = 0;            /* gaps between windows */
-static const unsigned int borderpx = 0;         /* border pixel of windows */
+static const unsigned int borderpx = 1;         /* border pixel of windows */
 static const unsigned int snap = 32;            /* snap pixel */
 static const Bool showbar = True;               /* false means no bar */
 static const Bool topbar = True;                /* false means bottom bar */
 static const float mfact = 0.50;                /* factor of master area size [0.05..0.95] */
 static const int nmaster = 1;                   /* number of clients in master area */
 static const Bool resizehints = False;          /* true means respect size hints in tiled resizals */
+static const char font[] = "-*-tamsynmod-medium-r-*-*-18-*-*-*-*-*-*-*";
 
-static const char font[] = "-*-tamsynmod-medium-r-*-*-16-*-*-*-*-*-*-*"; //-*-terminus-medium-r-*-*-20-*-*-*-*-*-*-*";
-static const char font2[] = "-*-terminus-medium-r-*-*-22-*-*-*-*-*-*-*"; 
-/*static const char font[] = "-*-tamsynmod-medium-r-*-*-14-*-*-*-*-*-*-*";*/
 static const char colors[NUMCOLORS][ColLast][13] = {
     /* border    fg         bg */
     { "#2D2D2D", "#FFFFFF", "#2D2D2D" },        /* 01 - regular */
-    { "#5E5E9E", "#FFFFFF", "#2D2D2D" },        /* 02 - selected */
-    { "#2D2D2D", "#FF99CC", "#2D2D2D" },        /* 03 - urgent */
+    { "#2aa198", "#FFFFFF", "#2D2D2D" },        /* 02 - selected */
+    { "#2D2D2D", "#FF0000", "#2D2D2D" },        /* 03 - urgent */
     { "#2D2D2D", "#666666", "#2D2D2D" },        /* 04 - occupied */
     { "#2D2D2D", "#A82222", "#2D2D2D" },        /* 05 - red */
-    { "#2D2D2D", "#6699CC", "#2D2D2D" },        /* 06 - blue 4779b3*/
+    { "#2D2D2D", "#268bd2", "#2D2D2D" },        /* 06 - blue 4779b3*/
     { "#2D2D2D", "#349147", "#2D2D2D" },        /* 07 - green */
     { "#2D2D2D", "#666666", "#2D2D2D" },        /* 08 - dark grey */
     { "#2D2D2D", "#DCDCDC", "#2D2D2D" },        /* 09 - light grey */
@@ -59,28 +57,24 @@ static const Tag tags[] = {
 
 static const Rule rules[] = {
     /* class        instance    title       tags mask     isfloating      iscentred       monitor */
-   { "Chromium",    NULL,       NULL,       1 << 0,       False,            False,        -1 },
-   { "Chrome",    NULL,       NULL,       1 << 0,       False,            False,        -1 },
-   { "Google-chrome-stable",    NULL,       NULL,       1 << 0,       False,            False,        -1 },
-   { "Filezilla",   NULL,       NULL,       1 << 3,       False,            False,       -1 },
-   { "Spacefm",     NULL,       NULL,       0,            True,             True,        -1 },
-   { "Truecrypt",   NULL,       NULL,       0,            True,             True,        -1 },
-   { "Firefox",     NULL,       NULL,       1 << 0,       False,            False,       -1 },
-   { "Steam",       NULL,       NULL,       1 << 3,       False,            True,        -1 },
-   { "Gimp",        NULL,       NULL,       0,            True,             True,        -1 },
-   { "Nwn",         NULL,       NULL,       1 << 3,       True,             True,        -1 },
-   { "FTL",         NULL,       NULL,       1 << 3,       True,             True,        -1 },
-   {  NULL,         NULL,     "mutt",       1 << 4,       False,            False,       -1 },
-   {  NULL,         NULL,     "tmux",       1 << 1,       False,            False,       -1 },
-   {  NULL,         NULL,  "YouTube",       1 << 2,       False,            False,       -1 },
-   { "mpv",         NULL,       NULL,       1 << 2,       False,            False,       -1 },
+   { "Chromium",    NULL,       NULL,       1 << 0,       False, True,       -1 },
+   { "Filezilla",   NULL,       NULL,       1 << 3,       False, False,       -1 },
+   { "Spacefm",     NULL,       NULL,       0,            True,  True,       -1 },
+   { "Truecrypt",   NULL,       NULL,       0,            True,  True,       -1 },
+   { "Firefox",     NULL,       NULL,       1 << 0,       False, False,      -1 },
+   { "Steam",       NULL,       NULL,       1 << 3,       False, True,       -1 },
+   { "Gimp",        NULL,       NULL,       0,            True,  True,       -1 },
+   {  NULL,         NULL,     "mutt",       1 << 4,       False, False,       -1 },
+   {  NULL,         NULL,     "tmux",       1 << 1,       False, False,       -1 },
+   {  NULL,         NULL,  "YouTube",       1 << 2,       False, False,       -1 },
+   { "mpv",         NULL,       NULL,       1 << 2,            False,  False,       -1 },
 };
 
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 static const char *menu[] = { "dmenu_run", "-i", "-fn", font, "-nb", colors[0][ColBG], "-nf", colors[0][ColFG], "-sb", colors[1][ColBG], "-sf", colors[9][ColFG], NULL };
-static const char *webb[] = { "google-chrome-stable", NULL, "Google-chrome-stable" };
+static const char *webb[] = { "firefox", NULL, "Firefox" };
 static const char *file[] = { "pcmanfm", NULL, "Pcmanfm" };
 static const char   *mailcmd[] = { "urxvtc", "-title", "mutt", "-e", "mutt", NULL };
 static const char   *tmuxcmd[] = { "urxvtc", "-title", "tmux", "-e", "tmux", NULL };
