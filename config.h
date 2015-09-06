@@ -12,7 +12,7 @@ static const unsigned int taglinepx = 3;        /* height of tag underline */
 static const unsigned int systrayspacing = 1;   /* systray spacing */
 static const Bool showsystray = True;           /* false means no systray */
 static const unsigned int gappx = 0;            /* gaps between windows */
-static const unsigned int borderpx = 0;         /* border pixel of windows */
+static const unsigned int borderpx = 2;         /* border pixel of windows */
 static const unsigned int snap = 32;            /* snap pixel */
 static const Bool showbar = True;               /* false means no bar */
 static const Bool topbar = True;                /* false means bottom bar */
@@ -20,24 +20,23 @@ static const float mfact = 0.50;                /* factor of master area size [0
 static const int nmaster = 1;                   /* number of clients in master area */
 static const Bool resizehints = False;          /* true means respect size hints in tiled resizals */
 
-static const char font[] = "-*-tamsynmod-medium-r-*-*-16-*-*-*-*-*-*-*"; //-*-terminus-medium-r-*-*-20-*-*-*-*-*-*-*";
+static const char font[] = "-*-tamsynmod-medium-r-*-*-14-*-*-*-*-*-*-*"; //-*-terminus-medium-r-*-*-20-*-*-*-*-*-*-*";
 static const char font2[] = "-*-terminus-medium-r-*-*-22-*-*-*-*-*-*-*"; 
-/*static const char font[] = "-*-tamsynmod-medium-r-*-*-14-*-*-*-*-*-*-*";*/
 static const char colors[NUMCOLORS][ColLast][13] = {
     /* border    fg         bg */
-    { "#2D2D2D", "#FFFFFF", "#2D2D2D" },        /* 01 - regular */
-    { "#5E5E9E", "#FFFFFF", "#2D2D2D" },        /* 02 - selected */
-    { "#2D2D2D", "#FF99CC", "#2D2D2D" },        /* 03 - urgent */
-    { "#2D2D2D", "#666666", "#2D2D2D" },        /* 04 - occupied */
-    { "#2D2D2D", "#A82222", "#2D2D2D" },        /* 05 - red */
-    { "#2D2D2D", "#6699CC", "#2D2D2D" },        /* 06 - blue 4779b3*/
-    { "#2D2D2D", "#349147", "#2D2D2D" },        /* 07 - green */
-    { "#2D2D2D", "#666666", "#2D2D2D" },        /* 08 - dark grey */
-    { "#2D2D2D", "#DCDCDC", "#2D2D2D" },        /* 09 - light grey */
-    { "#2D2D2D", "#4779b3", "#2D2D2D" },        /* 0A - orange */
-    { "#2D2D2D", "#B86A6A", "#2D2D2D" },        /* 0B - pink */
-    { "#2D2D2D", "#FFFFFF", "#2D2D2D" },        /* 0C - white */
-    { "#2D2D2D", "#000000", "#2D2D2D" },        /* 0D - black */
+    { "#272822", "#f8f8f2", "#272822" },        /* 01 - regular */
+    { "#66d9ef", "#f8f8f2", "#66d9ef" },        /* 02 - selected */
+    { "#272822", "#FF99CC", "#272822" },        /* 03 - urgent */
+    { "#272822", "#666666", "#272822" },        /* 04 - occupied */
+    { "#272822", "#f92672", "#272822" },        /* 05 - red */
+    { "#272822", "#66d9ef", "#272822" },        /* 06 - blue */
+    { "#272822", "#a6e22e", "#272822" },        /* 07 - green */
+    { "#272822", "#666666", "#272822" },        /* 08 - dark grey */
+    { "#272822", "#DCDCDC", "#272822" },        /* 09 - light grey */
+    { "#272822", "#4779b3", "#272822" },        /* 0A - orange */
+    { "#272822", "#B86A6A", "#272822" },        /* 0B - pink */
+    { "#272822", "#f8f8f2", "#272822" },        /* 0C - white */
+    { "#272822", "#000000", "#272822" },        /* 0D - black */
 };
 
 static const Layout layouts[] = {
@@ -58,29 +57,29 @@ static const Tag tags[] = {
 };
 
 static const Rule rules[] = {
-    /* class        instance    title       tags mask     isfloating      iscentred       monitor */
-   { "Chromium",    NULL,       NULL,       1 << 0,       False,            False,        -1 },
-   { "Chrome",    NULL,       NULL,       1 << 0,       False,            False,        -1 },
+    /* class                   instance    title       tags mask     isfloating      iscentred       monitor */
+   { "Chromium",                NULL,       NULL,       1 << 0,       False,            False,        -1 },
+   { "Chrome",                  NULL,       NULL,       1 << 0,       False,            False,        -1 },
    { "Google-chrome-stable",    NULL,       NULL,       1 << 0,       False,            False,        -1 },
-   { "Filezilla",   NULL,       NULL,       1 << 3,       False,            False,       -1 },
-   { "Spacefm",     NULL,       NULL,       0,            True,             True,        -1 },
-   { "Truecrypt",   NULL,       NULL,       0,            True,             True,        -1 },
-   { "Firefox",     NULL,       NULL,       1 << 0,       False,            False,       -1 },
-   { "Steam",       NULL,       NULL,       1 << 3,       False,            True,        -1 },
-   { "Gimp",        NULL,       NULL,       0,            True,             True,        -1 },
-   { "Nwn",         NULL,       NULL,       1 << 3,       True,             True,        -1 },
-   { "FTL",         NULL,       NULL,       1 << 3,       True,             True,        -1 },
-   {  NULL,         NULL,     "mutt",       1 << 4,       False,            False,       -1 },
-   {  NULL,         NULL,     "tmux",       1 << 1,       False,            False,       -1 },
-   {  NULL,         NULL,  "YouTube",       1 << 2,       False,            False,       -1 },
-   { "mpv",         NULL,       NULL,       1 << 2,       False,            False,       -1 },
+   { "Filezilla",               NULL,       NULL,       1 << 3,       False,            False,       -1 },
+   { "Spacefm",                 NULL,       NULL,       0,            True,             True,        -1 },
+   { "Truecrypt",               NULL,       NULL,       0,            True,             True,        -1 },
+   { "Firefox",                 NULL,       NULL,       1 << 0,       False,            False,       -1 },
+   { "Steam",                   NULL,       NULL,       1 << 3,       False,            True,        -1 },
+   { "Gimp",                    NULL,       NULL,       0,            True,             True,        -1 },
+   { "Nwn",                     NULL,       NULL,       1 << 3,       True,             True,        -1 },
+   { "FTL",                     NULL,       NULL,       1 << 3,       True,             True,        -1 },
+   {  NULL,                     NULL,     "mutt",       1 << 4,       False,            False,       -1 },
+   {  NULL,                     NULL,     "tmux",       1 << 1,       False,            False,       -1 },
+   {  NULL,                     NULL,  "YouTube",       1 << 2,       False,            False,       -1 },
+   { "mpv",                     NULL,       NULL,       1 << 2,       False,            False,       -1 },
 };
 
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 static const char *menu[] = { "dmenu_run", "-i", "-fn", font, "-nb", colors[0][ColBG], "-nf", colors[0][ColFG], "-sb", colors[1][ColBG], "-sf", colors[9][ColFG], NULL };
-static const char *webb[] = { "google-chrome-stable", NULL, "Google-chrome-stable" };
+static const char *webb[] = { "firefox", NULL, "Firefox" };
 static const char *file[] = { "pcmanfm", NULL, "Pcmanfm" };
 static const char   *mailcmd[] = { "urxvtc", "-title", "mutt", "-e", "mutt", NULL };
 static const char   *tmuxcmd[] = { "urxvtc", "-title", "tmux", "-e", "tmux", NULL };
@@ -91,19 +90,19 @@ static const char *fz[] = { "filezilla", NULL,  };
 
 static Key keys[] = {
     { MODKEY,           XK_p,       spawn,          {.v = menu } },
-    { MODKEY|ShiftMask, XK_w,       runorraise,          {.v = webb } },
-    { MODKEY|ShiftMask, XK_Return,  spawn,     {.v = term } },
+    { MODKEY|ShiftMask, XK_w,       runorraise,     {.v = webb } },
+    { MODKEY|ShiftMask, XK_Return,  spawn,          {.v = term } },
     { MODKEY|ShiftMask, XK_f,       runorraise,     {.v = file } },
-    { MODKEY|ShiftMask, XK_t,       runorraise,     {.v = tmuxcmd } },
-    { MODKEY|ShiftMask, XK_m,       runorraise,     {.v = mailcmd } },
-    { MODKEY|ShiftMask, XK_y,       runorraise,     {.v = yt } },
+    { MODKEY|ShiftMask, XK_t,       spawn,          {.v = tmuxcmd } },
+    { MODKEY|ShiftMask, XK_m,       spawn,          {.v = mailcmd } },
+    { MODKEY|ShiftMask, XK_y,       spawn,          {.v = yt } },
     { MODKEY|ShiftMask, XK_z,       runorraise,     {.v = fz } },
     { MODKEY|ShiftMask, XK_q,       quit,           {0} },
     { MODKEY|ShiftMask, XK_b,       togglebar,      {0} },
     { MODKEY|ShiftMask, XK_c,       killclient,     {0} },
     { MODKEY,           XK_Return,  zoom,           {0} },
     { MODKEY,           XK_Tab,     view,           {0} },
-    { MODKEY|ControlMask,           XK_f, togglefloating, {0} },
+    { MODKEY|ControlMask,     XK_f, togglefloating, {0} },
     { MODKEY,           XK_space,   setlayout,      {0} },
     { MODKEY,           XK_t,       setlayout,      {.v = &layouts[0] } },
     { MODKEY,           XK_b,       setlayout,      {.v = &layouts[1] } },
