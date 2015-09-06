@@ -35,5 +35,5 @@ Patches/Features
 * Push
 * Cycle
 
-![Screenshot](screenshot1.png "vim monacle")
+![Screenshot](screenshot3.png "vim monacle")
 ![Screenshot](screenshot2.png "clean")
