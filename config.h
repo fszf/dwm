@@ -25,9 +25,9 @@ static const char font2[] = "-*-terminus-medium-r-*-*-22-*-*-*-*-*-*-*";
 static const char colors[NUMCOLORS][ColLast][13] = {
     /* border    fg         bg */
     { "#272822", "#f8f8f2", "#272822" },        /* 01 - regular */
-    { "#66d9ef", "#f8f8f2", "#66d9ef" },        /* 02 - selected */
+    { "#66d9ef", "#272822", "#66d9ef" },        /* 02 - selected */
     { "#272822", "#FF99CC", "#272822" },        /* 03 - urgent */
-    { "#272822", "#666666", "#272822" },        /* 04 - occupied */
+    { "#66d9ef", "#666666", "#272822" },        /* 04 - occupied */
     { "#272822", "#f92672", "#272822" },        /* 05 - red */
     { "#272822", "#66d9ef", "#272822" },        /* 06 - blue */
     { "#272822", "#a6e22e", "#272822" },        /* 07 - green */
