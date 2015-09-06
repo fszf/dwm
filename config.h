@@ -8,11 +8,11 @@
     
 static const unsigned int tagspacing = 0;       /* space between tags */
 static const unsigned int tagpadding = 1;      /* inner padding of tags */
-static const unsigned int taglinepx = 3;        /* height of tag underline */
+static const unsigned int taglinepx = 4;        /* height of tag underline */
 static const unsigned int systrayspacing = 1;   /* systray spacing */
 static const Bool showsystray = True;           /* false means no systray */
 static const unsigned int gappx = 0;            /* gaps between windows */
-static const unsigned int borderpx = 2;         /* border pixel of windows */
+static const unsigned int borderpx = 1;         /* border pixel of windows */
 static const unsigned int snap = 32;            /* snap pixel */
 static const Bool showbar = True;               /* false means no bar */
 static const Bool topbar = True;                /* false means bottom bar */
@@ -20,23 +20,23 @@ static const float mfact = 0.50;                /* factor of master area size [0
 static const int nmaster = 1;                   /* number of clients in master area */
 static const Bool resizehints = False;          /* true means respect size hints in tiled resizals */
 
-static const char font[] = "-*-tamsynmod-medium-r-*-*-14-*-*-*-*-*-*-*"; //-*-terminus-medium-r-*-*-20-*-*-*-*-*-*-*";
-static const char font2[] = "-*-terminus-medium-r-*-*-22-*-*-*-*-*-*-*"; 
+static const char font[] = "-*-tamsynmod-medium-r-*-*-16-*-*-*-*-*-*-*"; //-*-terminus-medium-r-*-*-20-*-*-*-*-*-*-*";
+static const char font2[] = "-*-terminus-medium-r-*-*-24-*-*-*-*-*-*-*"; 
 static const char colors[NUMCOLORS][ColLast][13] = {
     /* border    fg         bg */
-    { "#272822", "#f8f8f2", "#272822" },        /* 01 - regular */
-    { "#66d9ef", "#272822", "#66d9ef" },        /* 02 - selected */
-    { "#272822", "#FF99CC", "#272822" },        /* 03 - urgent */
-    { "#66d9ef", "#666666", "#272822" },        /* 04 - occupied */
-    { "#272822", "#f92672", "#272822" },        /* 05 - red */
-    { "#272822", "#66d9ef", "#272822" },        /* 06 - blue */
-    { "#272822", "#a6e22e", "#272822" },        /* 07 - green */
-    { "#272822", "#666666", "#272822" },        /* 08 - dark grey */
-    { "#272822", "#DCDCDC", "#272822" },        /* 09 - light grey */
-    { "#272822", "#4779b3", "#272822" },        /* 0A - orange */
-    { "#272822", "#B86A6A", "#272822" },        /* 0B - pink */
-    { "#272822", "#f8f8f2", "#272822" },        /* 0C - white */
-    { "#272822", "#000000", "#272822" },        /* 0D - black */
+    { "#272822", "#f8f8f2", "#323232" },        /* 01 - regular */
+    { "#f8f8f2", "#a6e22e", "#323232" },        /* 02 - selected */
+    { "#272822", "#FF99CC", "#323232" },        /* 03 - urgent */
+    { "#f8f8f2", "#666666", "#323232" },        /* 04 - occupied */
+    { "#272822", "#f92672", "#323232" },        /* 05 - red */
+    { "#272822", "#66d9ef", "#323232" },        /* 06 - blue */
+    { "#272822", "#a6e22e", "#323232" },        /* 07 - green */
+    { "#272822", "#666666", "#323232" },        /* 08 -  */
+    { "#272822", "#DCDCDC", "#323232" },        /* 09 -  */
+    { "#272822", "#a6e22e", "#323232" },        /* 0A - layout colours */
+    { "#272822", "#B86A6A", "#323232" },        /* 0B -  */
+    { "#272822", "#f8f8f2", "#323232" },        /* 0C -  */
+    { "#272822", "#000000", "#323232" },        /* 0D -  */
 };
 
 static const Layout layouts[] = {
@@ -85,7 +85,7 @@ static const char   *mailcmd[] = { "urxvtc", "-title", "mutt", "-e", "mutt", NUL
 static const char   *tmuxcmd[] = { "urxvtc", "-title", "tmux", "-e", "tmux", NULL };
 static const char   *yt[] = { "urxvtc", "-title", "YouTube" "-e", "youtube-viewer", NULL };
 static const char *term[] = { "urxvtc", NULL, };
-static const char *fz[] = { "filezilla", NULL,  };
+static const char *fz[] = { "filezilla", NULL, "Filezilla" };
 
 
 static Key keys[] = {
@@ -95,7 +95,7 @@ static Key keys[] = {
     { MODKEY|ShiftMask, XK_f,       runorraise,     {.v = file } },
     { MODKEY|ShiftMask, XK_t,       spawn,          {.v = tmuxcmd } },
     { MODKEY|ShiftMask, XK_m,       spawn,          {.v = mailcmd } },
-    { MODKEY|ShiftMask, XK_y,       spawn,          {.v = yt } },
+    { MODKEY|ShiftMask, XK_y,       runorraise,     {.v = yt } },
     { MODKEY|ShiftMask, XK_z,       runorraise,     {.v = fz } },
     { MODKEY|ShiftMask, XK_q,       quit,           {0} },
     { MODKEY|ShiftMask, XK_b,       togglebar,      {0} },
