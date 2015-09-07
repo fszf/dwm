@@ -71,7 +71,7 @@ static const Rule rules[] = {
    { "FTL",                     NULL,       NULL,       1 << 3,       True,             True,        -1 },
    {  NULL,                     NULL,     "mutt",       1 << 4,       False,            False,       -1 },
    {  NULL,                     NULL,     "tmux",       1 << 1,       False,            False,       -1 },
-   {  NULL,                     NULL,  "youtube",       1 << 2,       True,            True,       -1 },
+   {  NULL,                     NULL,  "youtube",       1 << 2,       False,            False,       -1 },
    { "mpv",                     NULL,       NULL,       1 << 2,       False,            False,       -1 },
 };
 
