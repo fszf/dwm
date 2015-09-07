@@ -71,7 +71,7 @@ static const Rule rules[] = {
    { "FTL",                     NULL,       NULL,       1 << 3,       True,             True,        -1 },
    {  NULL,                     NULL,     "mutt",       1 << 4,       False,            False,       -1 },
    {  NULL,                     NULL,     "tmux",       1 << 1,       False,            False,       -1 },
-   {  NULL,                     NULL,  "YouTube",       1 << 2,       False,            False,       -1 },
+   {  NULL,                     NULL,  "youtube",       1 << 2,       True,            True,       -1 },
    { "mpv",                     NULL,       NULL,       1 << 2,       False,            False,       -1 },
 };
 
@@ -83,7 +83,7 @@ static const char *webb[] = { "firefox", NULL, "Firefox" };
 static const char *file[] = { "pcmanfm", NULL, "Pcmanfm" };
 static const char   *mailcmd[] = { "urxvtc", "-title", "mutt", "-e", "mutt", NULL };
 static const char   *tmuxcmd[] = { "urxvtc", "-title", "tmux", "-e", "tmux", NULL };
-static const char   *yt[] = { "urxvtc", "-title", "YouTube" "-e", "youtube-viewer", NULL };
+static const char   *yt[] = { "urxvtc", "-title", "youtube", "-e", "youtube-viewer", NULL };
 static const char *term[] = { "urxvtc", NULL, };
 static const char *fz[] = { "filezilla", NULL, "Filezilla" };
 
@@ -95,7 +95,7 @@ static Key keys[] = {
     { MODKEY|ShiftMask, XK_f,       runorraise,     {.v = file } },
     { MODKEY|ShiftMask, XK_t,       spawn,          {.v = tmuxcmd } },
     { MODKEY|ShiftMask, XK_m,       spawn,          {.v = mailcmd } },
-    { MODKEY|ShiftMask, XK_y,       runorraise,     {.v = yt } },
+    { MODKEY|ShiftMask, XK_y,       spawn,          {.v = yt } },
     { MODKEY|ShiftMask, XK_z,       runorraise,     {.v = fz } },
     { MODKEY|ShiftMask, XK_q,       quit,           {0} },
     { MODKEY|ShiftMask, XK_b,       togglebar,      {0} },
