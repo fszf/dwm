@@ -35,5 +35,10 @@ Patches/Features
 * Push
 * Cycle
 
+Dwm statusbar
+----------------
+You can find this in my scripts repo.
+
+
 ![Screenshot](screenshot3.png "vim monacle")
 ![Screenshot](screenshot2.png "clean")
