@@ -34,9 +34,9 @@ static const char colors[NUMCOLORS][ColLast][13] = {
     { "#2a2e35", "#666666", "#2a2e35" },        /* 08 -  */
     { "#2a2e35", "#DCDCDC", "#2a2e35" },        /* 09 -  */
     { "#2a2e35", "#94daa9", "#2a2e35" },        /* 0A - layout colours */
-    { "#2a2e35", "#B86A6A", "#2a2e35" },        /* 0B -  */
-    { "#2a2e35", "#f8f8f2", "#2a2e35" },        /* 0C -  */
-    { "#2a2e35", "#000000", "#2a2e35" },        /* 0D -  */
+    { "#2a2e35", "#B86A6A", "#2a2e35" },        /* 0B -  dwmstatus blue/grey*/
+    { "#2a2e35", "#94daa9", "#5a5a5a" },        /* 0C -  dwmstatus green/grey*/
+    { "#2a2e35", "#f8f8f2", "#5a5a5a" },        /* 0D -  dwmstatus normal/grey*/
 };
 
 static const Layout layouts[] = {
