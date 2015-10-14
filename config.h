@@ -83,6 +83,7 @@ static const char *webb[] = { "firefox", NULL, "Firefox" };
 static const char *file[] = { "pcmanfm", NULL, "Pcmanfm" };
 static const char *fz[] = { "filezilla", NULL, "Filezilla" };
 static const char *term[] = { "termite", NULL, }; 
+static const char   *mailcmd[] = { "termite", "-e", "mutt", NULL };
 
 /* Ignore below to use termite instead
 static const char   *mailcmd[] = { "urxvtc", "-title", "mutt", "-e", "mutt", NULL };
@@ -96,9 +97,9 @@ static Key keys[] = {
     { MODKEY|ShiftMask, XK_w,       runorraise,     {.v = webb } },
     { MODKEY|ShiftMask, XK_Return,  spawn,          {.v = term } },
     { MODKEY|ShiftMask, XK_f,       runorraise,     {.v = file } },
+    { MODKEY|ShiftMask, XK_m,       spawn,          {.v = mailcmd } },
     /*
     { MODKEY|ShiftMask, XK_t,       spawn,          {.v = tmuxcmd } },
-    { MODKEY|ShiftMask, XK_m,       spawn,          {.v = mailcmd } },
     { MODKEY|ShiftMask, XK_y,       spawn,          {.v = yt } }, */
     { MODKEY|ShiftMask, XK_z,       runorraise,     {.v = fz } },
     { MODKEY|ShiftMask, XK_q,       quit,           {0} },
