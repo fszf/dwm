@@ -12,7 +12,7 @@ static const unsigned int taglinepx = 4;        /* height of tag underline */
 static const unsigned int systrayspacing = 1;   /* systray spacing */
 static const Bool showsystray = True;           /* false means no systray */
 static const unsigned int gappx = 10;            /* gaps between windows */
-static const unsigned int borderpx = 1;         /* border pixel of windows */
+static const unsigned int borderpx = 3;         /* border pixel of windows */
 static const unsigned int snap = 32;            /* snap pixel */
 static const Bool showbar = True;               /* false means no bar */
 static const Bool topbar = True;                /* false means bottom bar */
@@ -50,26 +50,25 @@ static const Layout layouts[] = {
 static const Tag tags[] = {
     /* name     layout          mfact   nmaster */
     { "web",    &layouts[0],    -1,     -1 },
-    { "term",   &layouts[1],    -1,     -1 },
-    { "media",  &layouts[1],    -1,     -1 },
+    { "term",   &layouts[0],    -1,     -1 },
+    { "media",  &layouts[1],    .75,     -1 },
     { "misc",   &layouts[0],    -1,     -1 },
     { "mail",   &layouts[0],    -1,     -1 },
 };
 
 static const Rule rules[] = {
     /* class                   instance    title       tags mask     isfloating      iscentred       monitor */
-   { "Chromium",                NULL,       NULL,       1 << 0,       False,            False,        -1 },
-   { "Chrome",                  NULL,       NULL,       1 << 0,       False,            False,        -1 },
-   { "Google-chrome-stable",    NULL,       NULL,       1 << 0,       False,            False,        -1 },
+   { "Google-chrome-stable",    NULL,       NULL,       1 << 0,       False,            False,       -1 },
    { "Filezilla",               NULL,       NULL,       1 << 3,       False,            False,       -1 },
-   { "Pcmanfm",                 NULL,       NULL,       0,            True,             True,        -1 },
-   { "Truecrypt",               NULL,       NULL,       0,            True,             True,        -1 },
+   { "Pcmanfm",                 NULL,       NULL,       1 << 3,       False,            False,       -1 },
+   { "Truecrypt",               NULL,       NULL,       1 << 3,       True,             True,        -1 },
    { "Firefox",                 NULL,       NULL,       1 << 0,       False,            False,       -1 },
    { "Steam",                   NULL,       NULL,       1 << 3,       False,            True,        -1 },
-   { "Gimp",                    NULL,       NULL,       0,            True,             True,        -1 },
+   { "Calibre",                   NULL,       NULL,       1 << 3,       False,            True,        -1 },
+   { "Gimp",                    NULL,       NULL,       1 << 3,       True,             True,        -1 },
    { "Nwn",                     NULL,       NULL,       1 << 3,       True,             True,        -1 },
    { "FTL",                     NULL,       NULL,       1 << 3,       True,             True,        -1 },
-   {  NULL,                     NULL,     "mutt",       1 << 4,       False,            False,       -1 },
+   {  NULL,                     "mutt",     NULL,       1 << 4,       False,            False,       -1 },
    {  NULL,                     NULL,     "tmux",       1 << 1,       False,            False,       -1 },
    {  NULL,                     NULL,  "youtube",       1 << 2,       False,            False,       -1 },
    { "mpv",                     NULL,       NULL,       1 << 2,       False,            False,       -1 },
@@ -83,7 +82,7 @@ static const char *webb[] = { "firefox", NULL, "Firefox" };
 static const char *file[] = { "pcmanfm", NULL, "Pcmanfm" };
 static const char *fz[] = { "filezilla", NULL, "Filezilla" };
 static const char *term[] = { "termite", NULL, }; 
-static const char   *mailcmd[] = { "termite", "-e", "mutt", NULL };
+static const char   *mailcmd[] = { "termite", "--name=mutt", "-e", "mutt", NULL };
 
 /* Ignore below to use termite instead
 static const char   *mailcmd[] = { "urxvtc", "-title", "mutt", "-e", "mutt", NULL };
