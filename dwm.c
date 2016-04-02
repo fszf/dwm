@@ -272,6 +272,7 @@ static void setup(void);
 static void showhide(Client *c);
 static void sigchld(int unused);
 static void spawn(const Arg *arg);
+static void spiral(Monitor *mon);
 static void tag(const Arg *arg);
 static void tagmon(const Arg *arg);
 static int textnw(const char *text, unsigned int len);

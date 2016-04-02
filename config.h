@@ -39,12 +39,16 @@ static const char colors[NUMCOLORS][ColLast][13] = {
     { "#2a2e35", "#f8f8f2", "#5a5a5a" },        /* 0D -  dwmstatus normal/grey*/
 };
 
+#include "fibonacci.c"
+
 static const Layout layouts[] = {
     /* symbol   gaps    arrange */
     { "þ",      True,   tile },
     { "ü",      True,   bstack },
     { "ÿ",      False,  monocle },
     { "ý",      False,  NULL },
+    { "[@]",    False,  spiral },
+
 };
 
 static const Tag tags[] = {
@@ -60,8 +64,6 @@ static const Rule rules[] = {
     /* class                   instance    title       tags mask     isfloating      iscentred       monitor */
    { "Google-chrome-stable",    NULL,       NULL,       1 << 0,       False,            False,       -1 },
    { "Filezilla",               NULL,       NULL,       1 << 3,       False,            False,       -1 },
-   { "Pcmanfm",                 NULL,       NULL,       1 << 3,       False,            False,       -1 },
-   { "Truecrypt",               NULL,       NULL,       1 << 3,       True,             True,        -1 },
    { "Firefox",                 NULL,       NULL,       1 << 0,       False,            False,       -1 },
    { "Steam",                   NULL,       NULL,       1 << 3,       False,            True,        -1 },
    { "Calibre",                   NULL,       NULL,       1 << 3,       False,            True,        -1 },
@@ -72,17 +74,19 @@ static const Rule rules[] = {
    {  NULL,                     NULL,     "tmux",       1 << 1,       False,            False,       -1 },
    {  NULL,                     NULL,  "youtube",       1 << 2,       False,            False,       -1 },
    { "mpv",                     NULL,       NULL,       1 << 2,       False,            False,       -1 },
+   { "Thunderbird",             NULL,       NULL,       1 << 4,       False,            False,       -1 },
 };
 
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 static const char *menu[] = { "dmenu_run", "-i", "-fn", font, "-nb", colors[0][ColBG], "-nf", colors[0][ColFG], "-sb", colors[1][ColBG], "-sf", colors[9][ColFG], NULL };
-static const char *webb[] = { "firefox-beta", NULL, "Firefox" };
+static const char *webb[] = { "firefox", NULL, "Firefox" };
 static const char *file[] = { "pcmanfm", NULL, "Pcmanfm" };
 static const char *fz[] = { "filezilla", NULL, "Filezilla" };
 static const char *term[] = { "termite", NULL, }; 
-static const char   *mailcmd[] = { "termite", "--name=mutt", "-e", "mutt", NULL };
+/*static const char   *mailcmd[] = { "termite", "--name=mutt", "-e", "mutt", NULL };*/
+static const char   *mailcmd[] = { "thunderbird-beta", NULL };
 
 /* Ignore below to use termite instead
 static const char   *mailcmd[] = { "urxvtc", "-title", "mutt", "-e", "mutt", NULL };
@@ -112,6 +116,7 @@ static Key keys[] = {
     { MODKEY,           XK_b,       setlayout,      {.v = &layouts[1] } },
     { MODKEY,           XK_m,       setlayout,      {.v = &layouts[2] } },
     { MODKEY,           XK_f,       setlayout,      {.v = &layouts[3] } },
+    { MODKEY,           XK_s,       setlayout,      {.v = &layouts[4] } },
     { MODKEY,           XK_j,       focusstack,     {.i = +1 } },
     { MODKEY,           XK_k,       focusstack,     {.i = -1 } },
     { MODKEY,           XK_h,       setmfact,       {.f = -0.05 } },
