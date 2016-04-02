@@ -1,6 +1,7 @@
 Taken from git clone https://github.com/KieranQuinn/dwm.git
 Then Applied cycle and push patch (modified from jasonwryan's bitbucket to patch on this dwm set.
 Fixed dwm.c to fix some previous errors that disabled runorraise.
+Applied fibonacci patch
 
 Source
 -----------
@@ -34,6 +35,7 @@ Patches/Features
 * runorraise
 * Push
 * Cycle
+* fibonacci
 
 Dwm statusbar
 ----------------
