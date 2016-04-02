@@ -11,8 +11,8 @@ static const unsigned int tagpadding = 1;      /* inner padding of tags */
 static const unsigned int taglinepx = 4;        /* height of tag underline */
 static const unsigned int systrayspacing = 1;   /* systray spacing */
 static const Bool showsystray = True;           /* false means no systray */
-static const unsigned int gappx = 10;            /* gaps between windows */
-static const unsigned int borderpx = 3;         /* border pixel of windows */
+static const unsigned int gappx = 0;            /* gaps between windows */
+static const unsigned int borderpx = 1;         /* border pixel of windows */
 static const unsigned int snap = 32;            /* snap pixel */
 static const Bool showbar = True;               /* false means no bar */
 static const Bool topbar = True;                /* false means bottom bar */
@@ -24,19 +24,19 @@ static const char font[] = "-*-tamsynmod-medium-r-*-*-14-*-*-*-*-*-*-*"; //-*-te
 static const char font2[] = "-*-terminus-medium-r-*-*-16-*-*-*-*-*-*-*"; 
 static const char colors[NUMCOLORS][ColLast][13] = {
     /* border    fg         bg */
-    { "#2a2e35", "#f8f8f2", "#2a2e35" },        /* 01 - regular */
-    { "#94daa9", "#94daa9", "#2a2e35" },        /* 02 - selected */
-    { "#2a2e35", "#FF99CC", "#2a2e35" },        /* 03 - urgent */
-    { "#2a2e35", "#666666", "#2a2e35" },        /* 04 - occupied */
-    { "#2a2e35", "#f92672", "#2a2e35" },        /* 05 - red */
-    { "#2a2e35", "#66d9ef", "#2a2e35" },        /* 06 - blue */
-    { "#2a2e35", "#94daa9", "#2a2e35" },        /* 07 - green */
-    { "#2a2e35", "#666666", "#2a2e35" },        /* 08 -  */
-    { "#2a2e35", "#DCDCDC", "#2a2e35" },        /* 09 -  */
-    { "#2a2e35", "#94daa9", "#2a2e35" },        /* 0A - layout colours */
-    { "#2a2e35", "#B86A6A", "#2a2e35" },        /* 0B -  dwmstatus blue/grey*/
-    { "#2a2e35", "#94daa9", "#5a5a5a" },        /* 0C -  dwmstatus green/grey*/
-    { "#2a2e35", "#f8f8f2", "#5a5a5a" },        /* 0D -  dwmstatus normal/grey*/
+    { "#31363c", "#f8f8f2", "#31363c" },        /* 01 - regular */
+    { "#1785a6", "#1785a6", "#31363c" },        /* 02 - selected */
+    { "#31363c", "#542835", "#31363c" },        /* 03 - urgent */
+    { "#31363c", "#666666", "#31363c" },        /* 04 - occupied */
+    { "#31363c", "#f92672", "#31363c" },        /* 05 - red */
+    { "#31363c", "#66d9ef", "#31363c" },        /* 06 - blue */
+    { "#31363c", "#78cab7", "#31363c" },        /* 07 - green */
+    { "#31363c", "#666666", "#31363c" },        /* 08 -  */
+    { "#31363c", "#DCDCDC", "#31363c" },        /* 09 -  */
+    { "#31363c", "#94daa9", "#31363c" },        /* 0A - layout colours */
+    { "#31363c", "#B86A6A", "#31363c" },        /* 0B -  dwmstatus blue/grey*/
+    { "#31363c", "#94daa9", "#5a5a5a" },        /* 0C -  dwmstatus green/grey*/
+    { "#31363c", "#f8f8f2", "#5a5a5a" },        /* 0D -  dwmstatus normal/grey*/
 };
 
 #include "fibonacci.c"
