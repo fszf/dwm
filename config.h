@@ -6,7 +6,7 @@
     { MODKEY|ShiftMask,             KEY,      tag,            {.ui = 1 << TAG} }, \
     { MODKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} },
     
-static const unsigned int tagspacing = 0;       /* space between tags */
+static const unsigned int tagspacing = 2;       /* space between tags */
 static const unsigned int tagpadding = 1;      /* inner padding of tags */
 static const unsigned int taglinepx = 4;        /* height of tag underline */
 static const unsigned int systrayspacing = 1;   /* systray spacing */
@@ -53,11 +53,11 @@ static const Layout layouts[] = {
 
 static const Tag tags[] = {
     /* name     layout          mfact   nmaster */
-    { "web",    &layouts[0],    -1,     -1 },
-    { "term",   &layouts[0],    -1,     -1 },
+    { "web",    &layouts[2],    -1,     -1 },
+    { "term",   &layouts[4],    -1,     -1 },
     { "media",  &layouts[1],    .75,     -1 },
-    { "misc",   &layouts[0],    -1,     -1 },
-    { "mail",   &layouts[0],    -1,     -1 },
+    { "misc",   &layouts[3],    -1,     -1 },
+    { "mail",   &layouts[2],    -1,     -1 },
 };
 
 static const Rule rules[] = {
