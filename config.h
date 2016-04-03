@@ -82,7 +82,7 @@ static const Rule rules[] = {
 
 static const char *menu[] = { "dmenu_run", "-i", "-fn", font, "-nb", colors[0][ColBG], "-nf", colors[0][ColFG], "-sb", colors[1][ColBG], "-sf", colors[9][ColFG], NULL };
 static const char *webb[] = { "firefox", NULL, "Firefox" };
-static const char *file[] = { "pcmanfm", NULL, "Pcmanfm" };
+static const char *file[] = { "nautilus", NULL, "Pcmanfm" };
 static const char *fz[] = { "filezilla", NULL, "Filezilla" };
 static const char *term[] = { "termite", NULL, }; 
 /*static const char   *mailcmd[] = { "termite", "--name=mutt", "-e", "mutt", NULL };*/
@@ -100,7 +100,7 @@ static Key keys[] = {
     { MODKEY|ShiftMask, XK_w,       runorraise,     {.v = webb } },
     { MODKEY|ShiftMask, XK_Return,  spawn,          {.v = term } },
     { MODKEY|ShiftMask, XK_f,       runorraise,     {.v = file } },
-    { MODKEY|ShiftMask, XK_m,       spawn,          {.v = mailcmd } },
+    { MODKEY|ShiftMask, XK_m,       runorraise,     {.v = mailcmd } },
     /*
     { MODKEY|ShiftMask, XK_t,       spawn,          {.v = tmuxcmd } },
     { MODKEY|ShiftMask, XK_y,       spawn,          {.v = yt } }, */
