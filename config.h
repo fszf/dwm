@@ -24,19 +24,19 @@ static const char font[] = "-*-tamsynmod-medium-r-*-*-14-*-*-*-*-*-*-*"; //-*-te
 static const char font2[] = "-*-terminus-medium-r-*-*-16-*-*-*-*-*-*-*"; 
 static const char colors[NUMCOLORS][ColLast][13] = {
     /* border    fg         bg */
-    { "#31363c", "#f8f8f2", "#31363c" },        /* 01 - regular */
-    { "#1785a6", "#1785a6", "#31363c" },        /* 02 - selected */
-    { "#31363c", "#542835", "#31363c" },        /* 03 - urgent */
-    { "#31363c", "#666666", "#31363c" },        /* 04 - occupied */
-    { "#31363c", "#f92672", "#31363c" },        /* 05 - red */
-    { "#31363c", "#66d9ef", "#31363c" },        /* 06 - blue */
-    { "#31363c", "#78cab7", "#31363c" },        /* 07 - green */
-    { "#31363c", "#666666", "#31363c" },        /* 08 -  */
-    { "#31363c", "#DCDCDC", "#31363c" },        /* 09 -  */
-    { "#31363c", "#94daa9", "#31363c" },        /* 0A - layout colours */
-    { "#31363c", "#B86A6A", "#31363c" },        /* 0B -  dwmstatus blue/grey*/
-    { "#31363c", "#94daa9", "#5a5a5a" },        /* 0C -  dwmstatus green/grey*/
-    { "#31363c", "#f8f8f2", "#5a5a5a" },        /* 0D -  dwmstatus normal/grey*/
+    { "#1c2023", "#f8f8f2", "#1c2023" },        /* 01 - regular */
+    { "#1785a6", "#1785a6", "#1c2023" },        /* 02 - selected */
+    { "#1c2023", "#EE72FF", "#1c2023" },        /* 03 - urgent */
+    { "#1c2023", "#666666", "#1c2023" },        /* 04 - occupied */
+    { "#1c2023", "#f92672", "#1c2023" },        /* 05 - red */
+    { "#1c2023", "#66d9ef", "#1c2023" },        /* 06 - blue */
+    { "#1c2023", "#EE72FF", "#1c2023" },        /* 07 - green */
+    { "#1c2023", "#666666", "#1c2023" },        /* 08 -  */
+    { "#1c2023", "#DCDCDC", "#1c2023" },        /* 09 -  */
+    { "#1c2023", "#4fff4b", "#1c2023" },        /* 0A - layout colours */
+    { "#1c2023", "#542835", "#1c2023" },        /* 0B -  dwmstatus blue/grey*/
+    { "#1c2023", "#542835", "#5a5a5a" },        /* 0C -  dwmstatus green/grey*/
+    { "#1c2023", "#f8f8f2", "#5a5a5a" },        /* 0D -  dwmstatus normal/grey*/
 };
 
 #include "fibonacci.c"
@@ -62,19 +62,21 @@ static const Tag tags[] = {
 
 static const Rule rules[] = {
     /* class                   instance    title       tags mask     isfloating      iscentred       monitor */
-   { "Google-chrome-stable",    NULL,       NULL,       1 << 0,       False,            False,       -1 },
+   { "Chromium",                NULL,       NULL,       1 << 0,       False,            False,       -1 },
    { "Filezilla",               NULL,       NULL,       1 << 3,       False,            False,       -1 },
    { "Firefox",                 NULL,       NULL,       1 << 0,       False,            False,       -1 },
+   { "Qutebrowser",             NULL,       NULL,       1 << 0,       False,            False,       -1 },
    { "Steam",                   NULL,       NULL,       1 << 3,       False,            True,        -1 },
-   { "Calibre",                   NULL,       NULL,       1 << 3,       False,            True,        -1 },
+   { "Calibre",                 NULL,       NULL,       1 << 3,       False,            True,        -1 },
    { "Gimp",                    NULL,       NULL,       1 << 3,       True,             True,        -1 },
    { "Nwn",                     NULL,       NULL,       1 << 3,       True,             True,        -1 },
    { "FTL",                     NULL,       NULL,       1 << 3,       True,             True,        -1 },
    {  NULL,                     "mutt",     NULL,       1 << 4,       False,            False,       -1 },
    {  NULL,                     NULL,     "tmux",       1 << 1,       False,            False,       -1 },
    {  NULL,                     NULL,  "youtube",       1 << 2,       False,            False,       -1 },
-   { "mpv",                     NULL,       NULL,       1 << 2,       False,            False,       -1 },
+   /*{ "mpv",                     NULL,       NULL,       1 << 2,       False,            False,       -1 },*/
    { "Thunderbird",             NULL,       NULL,       1 << 4,       False,            False,       -1 },
+   { "Thunar",                  NULL,       NULL,       1 << 3,       True,             False,       -1 },
 };
 
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
@@ -82,7 +84,7 @@ static const Rule rules[] = {
 
 static const char *menu[] = { "dmenu_run", "-i", "-fn", font, "-nb", colors[0][ColBG], "-nf", colors[0][ColFG], "-sb", colors[1][ColBG], "-sf", colors[9][ColFG], NULL };
 static const char *webb[] = { "firefox", NULL, "Firefox" };
-static const char *file[] = { "nautilus", NULL, "Pcmanfm" };
+static const char *file[] = { "thunar", NULL, "Thunar" };
 static const char *fz[] = { "filezilla", NULL, "Filezilla" };
 static const char *term[] = { "termite", NULL, }; 
 /*static const char   *mailcmd[] = { "termite", "--name=mutt", "-e", "mutt", NULL };*/
