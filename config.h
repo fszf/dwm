@@ -49,6 +49,7 @@ static const Layout layouts[] = {
     { "[B]",      True,   bstack },
     { "[M]",      False,  monocle },
     { "[Fl]",      False,  NULL },
+    { "[s]",      False,  spiral },
 
 };
 
@@ -146,8 +147,8 @@ static Key keys[] = {
     { MODKEY,                       XK_Right,  cycle,          {.i = +1 } },
     { MODKEY|ControlMask,           XK_Left,   tagcycle,       {.i = -1 } },
     { MODKEY|ControlMask,           XK_Right,  tagcycle,       {.i = +1 } },
-    { MODKEY|ControlMask,           XK_j,      pushdown,       {0} },                                                                                      
-    { MODKEY|ControlMask,           XK_k,      pushup,         {0} },
+    { MODKEY|ShiftMask,           XK_j,      pushdown,       {0} },                                                                                      
+    { MODKEY|ShiftMask,           XK_k,      pushup,         {0} },
     { MODKEY|ControlMask,           XK_q,      quit,           {0} },
     TAGKEYS(            XK_1,       0)
     TAGKEYS(            XK_2,       1)

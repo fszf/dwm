@@ -881,7 +881,7 @@ void drawcoloredtext(char *text) {
     int i, ox = dc.x;
     while(ptr) {
         for(i = 0; *ptr < 0 || *ptr > NUMCOLORS; i++, ptr++);
-            if(!*ptr)
+        if(!*ptr)
                 break;
         c = *ptr;
         *ptr = 0;
