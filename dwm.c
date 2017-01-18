@@ -297,6 +297,7 @@ static void updatewindowtype(Client *c);
 static void updatetitle(Client *c);
 static void updatewmhints(Client *c);
 static void view(const Arg *arg);
+static void warp(const Client *c);
 static Client *wintoclient(Window w);
 static Monitor *wintomon(Window w);
 static Client *wintosystrayicon(Window w);
@@ -481,6 +482,7 @@ void buttonpress(XEvent *e) {
         unfocus(selmon->sel, True);
         selmon = m;
         focus(NULL);
+        warp(selmon->sel);
     }
     if(ev->window == selmon->barwin) {
         i = x = 0;
@@ -1526,6 +1528,8 @@ void restack(Monitor *m) {
     }
     XSync(dpy, False);
     while(XCheckMaskEvent(dpy, EnterWindowMask, &ev));
+    if (m == selmon && (m->tagset[m->seltags] & m->sel->tags))
+            warp(m->sel);
 }
 
 void run(void) {
@@ -2100,6 +2104,25 @@ void view(const Arg *arg) {
     selmon->lt[selmon->sellt]= selmon->lts[selmon->curtag];
     focus(NULL);
     arrange(selmon);
+}
+
+void
+warp(const Client *c) {
+    Window dummy;
+    int x, y, di;
+    unsigned int dui;
+
+    if (!c) {
+        XWarpPointer(dpy, None, root, 0, 0, 0, 0, selmon->wx + selmon->ww / 2, selmon->wy + selmon->wh/2);
+        return;
+    }
+
+    XQueryPointer(dpy, root, &dummy, &dummy, &x, &y, &di, &di, &dui);
+
+    if((x > c->x && y > c->y && x < c->x + c->w && y < c->y + c->h) ||
+            (y > c->mon->by && y < c->mon->by +bh))
+        return;
+    XWarpPointer(dpy, None, c->win, 0, 0, 0, 0, c->w / 2, c->h / 2);
 }
 
 Client * wintoclient(Window w) {

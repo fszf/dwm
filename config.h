@@ -10,9 +10,9 @@ static const unsigned int tagspacing = 2;       /* space between tags */
 static const unsigned int tagpadding = 1;      /* inner padding of tags */
 static const unsigned int taglinepx = 4;        /* height of tag underline */
 static const unsigned int systrayspacing = 1;   /* systray spacing */
-static const Bool showsystray = True;           /* false means no systray */
+static const Bool showsystray = False;           /* false means no systray */
 static const unsigned int gappx = 0;            /* gaps between windows */
-static const unsigned int borderpx = 1;         /* border pixel of windows */
+static const unsigned int borderpx = 4;         /* border pixel of windows */
 static const unsigned int snap = 32;            /* snap pixel */
 static const Bool showbar = True;               /* false means no bar */
 static const Bool topbar = True;                /* false means bottom bar */
@@ -20,12 +20,12 @@ static const float mfact = 0.50;                /* factor of master area size [0
 static const int nmaster = 1;                   /* number of clients in master area */
 static const Bool resizehints = False;          /* true means respect size hints in tiled resizals */
 
-static const char font[] = "-*-tamsynmod-medium-r-*-*-14-*-*-*-*-*-*-*"; //-*-terminus-medium-r-*-*-20-*-*-*-*-*-*-*";
-static const char font2[] = "-*-terminus-medium-r-*-*-16-*-*-*-*-*-*-*"; 
+static const char font[] = "-misc-roboto-medium-r-*-*-28-*-*-*-*-*-*-*"; //-*-terminus-medium-r-*-*-20-*-*-*-*-*-*-*";
+static const char font2[] = "-*-terminus-medium-r-*-*-14-*-*-*-*-*-*-*"; 
 static const char colors[NUMCOLORS][ColLast][13] = {
     /* border    fg         bg */
-    { "#1c2023", "#f8f8f2", "#1c2023" },        /* 01 - regular */
-    { "#1785a6", "#1785a6", "#1c2023" },        /* 02 - selected */
+    { "#333333", "#f8f8f2", "#1c2023" },        /* 01 - regular */
+    { "#999999", "#1785a6", "#1c2023" },        /* 02 - selected */
     { "#1c2023", "#EE72FF", "#1c2023" },        /* 03 - urgent */
     { "#1c2023", "#666666", "#1c2023" },        /* 04 - occupied */
     { "#1c2023", "#f92672", "#1c2023" },        /* 05 - red */
@@ -43,28 +43,25 @@ static const char colors[NUMCOLORS][ColLast][13] = {
 
 static const Layout layouts[] = {
     /* symbol   gaps    arrange */
-    { "þ",      True,   tile },
-    { "ü",      True,   bstack },
-    { "ÿ",      False,  monocle },
-    { "ý",      False,  NULL },
+    { "[T]",      True,   tile },
+    { "[B]",      True,   bstack },
+    { "[M]",      False,  monocle },
+    { "[Fl]",      False,  NULL },
     { "[@]",    False,  spiral },
 
 };
 
 static const Tag tags[] = {
     /* name     layout          mfact   nmaster */
-    { "web",    &layouts[2],    -1,     -1 },
-    { "term",   &layouts[4],    -1,     -1 },
-    { "media",  &layouts[1],    .75,     -1 },
-    { "misc",   &layouts[3],    -1,     -1 },
-    { "mail",   &layouts[2],    -1,     -1 },
+    { "1",    &layouts[0],    -1,     -1 },
+    { "2",   &layouts[4],    -1,     -1 },
+    { "3",  &layouts[1],    .75,     -1 },
+    { "4",   &layouts[3],    -1,     -1 },
+    { "5",   &layouts[2],    -1,     -1 },
 };
 
 static const Rule rules[] = {
     /* class                   instance    title       tags mask     isfloating      iscentred       monitor */
-   { "Chromium",                NULL,       NULL,       1 << 0,       False,            False,       -1 },
-   { "Filezilla",               NULL,       NULL,       1 << 3,       False,            False,       -1 },
-   { "Firefox",                 NULL,       NULL,       1 << 0,       False,            False,       -1 },
    { "Qutebrowser",             NULL,       NULL,       1 << 0,       False,            False,       -1 },
    { "Steam",                   NULL,       NULL,       1 << 3,       False,            True,        -1 },
    { "Calibre",                 NULL,       NULL,       1 << 3,       False,            True,        -1 },
@@ -82,13 +79,18 @@ static const Rule rules[] = {
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
-static const char *menu[] = { "dmenu_run", "-i", "-fn", font, "-nb", colors[0][ColBG], "-nf", colors[0][ColFG], "-sb", colors[1][ColBG], "-sf", colors[9][ColFG], NULL };
-static const char *webb[] = { "firefox", NULL, "Firefox" };
+static const char *menu[] = { "emenu_run", "-i", "-fn", font, "-nb", colors[0][ColBG], "-nf", colors[0][ColFG], "-sb", colors[1][ColBG], "-sf", colors[9][ColFG], NULL };
+static const char *webb[] = { "qutebrowser", "--backend", "webengine", NULL, };
 static const char *file[] = { "thunar", NULL, "Thunar" };
 static const char *fz[] = { "filezilla", NULL, "Filezilla" };
 static const char *term[] = { "termite", NULL, }; 
 /*static const char   *mailcmd[] = { "termite", "--name=mutt", "-e", "mutt", NULL };*/
-static const char   *mailcmd[] = { "thunderbird-beta", NULL };
+static const char   *mailcmd[] = { "evolution", NULL };
+static const char   *calccmd[] = { "speedcrunch", NULL};
+static const char   *calendarcmd[] = { "gsimplecal", NULL};
+static const char   *wificmd[] = { "nmcli_dmenu", NULL};
+static const char   *passcmd[] = { "passmenu", NULL};
+
 
 /* Ignore below to use termite instead
 static const char   *mailcmd[] = { "urxvtc", "-title", "mutt", "-e", "mutt", NULL };
@@ -103,6 +105,10 @@ static Key keys[] = {
     { MODKEY|ShiftMask, XK_Return,  spawn,          {.v = term } },
     { MODKEY|ShiftMask, XK_f,       runorraise,     {.v = file } },
     { MODKEY|ShiftMask, XK_m,       runorraise,     {.v = mailcmd } },
+    { ControlMask,          XK_Tab,       spawn,          {.v = calccmd } },
+    { MODKEY,           XK_c,       spawn,          {.v = calendarcmd } },
+    { MODKEY,           XK_w,       spawn,          {.v = wificmd } },
+    { MODKEY,           XK_x,       spawn,          {.v = passcmd } },
     /*
     { MODKEY|ShiftMask, XK_t,       spawn,          {.v = tmuxcmd } },
     { MODKEY|ShiftMask, XK_y,       spawn,          {.v = yt } }, */

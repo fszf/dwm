@@ -41,6 +41,8 @@ Patches/Features
 * Push
 * Cycle
 * fibonacci
+* warp
+
 
 Dwm statusbar
 ----------------
