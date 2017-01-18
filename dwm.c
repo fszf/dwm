@@ -663,6 +663,7 @@ void configure(Client *c) {
 
 void configurenotify(XEvent *e) {
     Monitor *m;
+    Client *c;
     XConfigureEvent *ev = &e->xconfigure;
     Bool dirty;
     if(ev->window == root) {
@@ -674,8 +675,12 @@ void configurenotify(XEvent *e) {
                 XFreePixmap(dpy, dc.drawable);
             dc.drawable = XCreatePixmap(dpy, root, sw, bh, DefaultDepth(dpy, screen));
             updatebars();
-            for(m = mons; m; m = m->next)
+            for(m = mons; m; m = m->next) {
+                for (c = m->clients; c; c = c->next)
+                    if (c->isfullscreen)
+                        resizeclient(c, m->mx, m->my, m->mw, m->mh);
                 resizebarwin(m);
+            }
             focus(NULL);
             arrange(NULL);
         }
@@ -837,6 +842,7 @@ void drawbar(Monitor *m) {
         drawtext(tags[i].name, col, True);
         XSetForeground(dpy, dc.gc, col[ColBorder]);
         XFillRectangle(dpy, dc.drawable, dc.gc, dc.x, dc.h - taglinepx, dc.w, taglinepx);
+        /* XFillRectangle(dpy, dc.drawable, dc.gc, dc.x, dc.h - taglinepx, dc.w, taglinepx);*/
         dc.x += dc.w + tagspacing;
     }
     drawtext(m->ltsymbol, dc.colors[9], True);
