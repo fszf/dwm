@@ -17,8 +17,11 @@ static const unsigned int snap = 32;            /* snap pixel */
 static const Bool showbar = True;               /* false means no bar */
 static const Bool topbar = True;                /* false means bottom bar */
 static const float mfact = 0.50;                /* factor of master area size [0.05..0.95] */
+static const float smfact = 0.00;               /* factor of tiled clients [0.00..0.95] */
 static const int nmaster = 1;                   /* number of clients in master area */
 static const Bool resizehints = False;          /* true means respect size hints in tiled resizals */
+static const unsigned int minwsz = 20;          /* minimal height of a client for smfact */
+
 
 static const char font[] = "-misc-roboto-medium-r-*-*-28-*-*-*-*-*-*-*"; //-*-terminus-medium-r-*-*-20-*-*-*-*-*-*-*";
 static const char font2[] = "-*-terminus-medium-r-*-*-14-*-*-*-*-*-*-*"; 
@@ -40,24 +43,22 @@ static const char colors[NUMCOLORS][ColLast][13] = {
 };
 
 #include "fibonacci.c"
-
 static const Layout layouts[] = {
     /* symbol   gaps    arrange */
     { "[T]",      True,   tile },
     { "[B]",      True,   bstack },
     { "[M]",      False,  monocle },
     { "[Fl]",      False,  NULL },
-    { "[@]",    False,  spiral },
 
 };
 
 static const Tag tags[] = {
     /* name     layout          mfact   nmaster */
     { "1",    &layouts[0],    -1,     -1 },
-    { "2",   &layouts[4],    -1,     -1 },
-    { "3",  &layouts[1],    .75,     -1 },
-    { "4",   &layouts[3],    -1,     -1 },
-    { "5",   &layouts[2],    -1,     -1 },
+    { "2",   &layouts[0],    -1,     -1 },
+    { "3",  &layouts[0],    .75,     -1 },
+    { "4",   &layouts[0],    -1,     -1 },
+    { "5",   &layouts[0],    -1,     -1 },
 };
 
 static const Rule rules[] = {
@@ -129,6 +130,8 @@ static Key keys[] = {
     { MODKEY,           XK_k,       focusstack,     {.i = -1 } },
     { MODKEY,           XK_h,       setmfact,       {.f = -0.05 } },
     { MODKEY,           XK_l,       setmfact,       {.f = +0.05 } },
+    { MODKEY|ShiftMask,  XK_h,       setsmfact,       {.f = -0.05 } },
+    { MODKEY|ShiftMask,  XK_l,       setsmfact,       {.f = +0.05 } },
     { MODKEY,           XK_equal,   incnmaster,     {.i = +1 } },
     { MODKEY,           XK_minus,   incnmaster,     {.i = -1 } },
     { MODKEY,           XK_Down,    focusstack,     {.i = +1 } },

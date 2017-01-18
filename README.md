@@ -1,12 +1,9 @@
-###Update
-I no longer use this DWM.  I have moved onto DWM 6.1 and that repo can be found
-https://github.com/frank604/dwm-1
-
-
-Taken from git clone https://github.com/KieranQuinn/dwm.git
-Then Applied cycle and push patch (modified from jasonwryan's bitbucket to patch on this dwm set.
-Fixed dwm.c to fix some previous errors that disabled runorraise.
-Applied fibonacci patch
+### Changelog
+* Taken from git clone https://github.com/KieranQuinn/dwm.git
+* Then Applied cycle and push patch (modified from jasonwryan's bitbucket to patch on this dwm set.
+* Fixed dwm.c to fix some previous errors that disabled runorraise.
+* Applied fibonacci patch
+* 01/18/2017 Added some more patches (warp, stackmfact, three col)
 
 Source
 -----------
@@ -40,10 +37,13 @@ Patches/Features
 * runorraise
 * Push
 * Cycle
-* fibonacci
 * warp
+* fibonacci
+* stackmfact
 
-
+Optional Include
+----------------
+* three column
 Dwm statusbar
 ----------------
 You can find this in my scripts repo.

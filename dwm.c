@@ -48,7 +48,8 @@ client
 #define CLEANMASK(mask)         (mask & ~(numlockmask|LockMask) & (ShiftMask|ControlMask|Mod1Mask|Mod2Mask|Mod3Mask|Mod4Mask|Mod5Mask))
 #define INTERSECT(x,y,w,h,m)    (MAX(0, MIN((x)+(w),(m)->wx+(m)->ww) - MAX((x),(m)->wx)) \
                                * MAX(0, MIN((y)+(h),(m)->wy+(m)->wh) - MAX((y),(m)->wy)))
-#define ISVISIBLE(C)            ((C->tags & C->mon->tagset[C->mon->seltags]))
+#define ISVISIBLEONTAG(C, T)    ((C->tags & T))
+#define ISVISIBLE(C)            ISVISIBLEONTAG(C, C->mon->tagset[C->mon->seltags])
 #define LENGTH(X)               (sizeof X / sizeof X[0])
 #define MAX(A, B)               ((A) > (B) ? (A) : (B))
 #define MIN(A, B)               ((A) < (B) ? (A) : (B))
@@ -90,6 +91,7 @@ typedef union {
     int i;
     unsigned int ui;
     float f;
+    float sf;
     const void *v;
 } Arg;
 
@@ -170,6 +172,7 @@ struct Monitor {
     const Layout **lts;
     double *mfacts;
     int *nmasters;
+    float smfact;
 };
 
 typedef struct {
@@ -200,6 +203,7 @@ static Bool applysizehints(Client *c, int *x, int *y, int *w, int *h, Bool inter
 static void arrange(Monitor *m);
 static void arrangemon(Monitor *m);
 static void attach(Client *c);
+static void attachaside(Client *c);
 static void attachstack(Client *c);
 static void buttonpress(XEvent *e);
 static void checkotherwm(void);
@@ -244,6 +248,7 @@ static void maprequest(XEvent *e);
 static void monocle(Monitor *m);
 static void motionnotify(XEvent *e);
 static void movemouse(const Arg *arg);
+static Client *nexttagged(Client *c);
 static Client *nexttiled(Client *c);
 static void pop(Client *);
 static void propertynotify(XEvent *e);
@@ -268,6 +273,7 @@ static void setfocus(Client *c);
 static void setfullscreen(Client *c, Bool fullscreen);
 static void setlayout(const Arg *arg);
 static void setmfact(const Arg *arg);
+static void setsmfact(const Arg *arg);
 static void setup(void);
 static void showhide(Client *c);
 static void sigchld(int unused);
@@ -464,6 +470,17 @@ void arrangemon(Monitor *m) {
 void attach(Client *c) {
     c->next = c->mon->clients;
     c->mon->clients = c;
+}
+
+void
+attachaside(Client *c) {
+	Client *at = nexttagged(c);
+	if(!at) {
+		attach(c);
+		return;
+	}
+	c->next = at->next;
+	at->next = c;
 }
 
 void attachstack(Client *c) {
@@ -1186,7 +1203,7 @@ void manage(Window w, XWindowAttributes *wa) {
         c->isfloating = c->oldstate = trans != None || c->isfixed;
     if(c->isfloating)
         XRaiseWindow(dpy, c->win);
-    attach(c);
+    attachaside(c);
     attachstack(c);
     XMoveResizeWindow(dpy, c->win, c->x + 2 * sw, c->y, c->w, c->h); /* some windows require this */
     setclientstate(c, NormalState);
@@ -1286,6 +1303,16 @@ void movemouse(const Arg *arg) {
         selmon = m;
         focus(NULL);
     }
+}
+
+Client *
+nexttagged(Client *c) {
+	Client *walked = c->mon->clients;
+	for(;
+		walked && (walked->isfloating || !ISVISIBLEONTAG(walked, c->tags));
+		walked = walked->next
+	);
+	return walked;
 }
 
 Client * nexttiled(Client *c) {
@@ -1570,7 +1597,7 @@ void sendmon(Client *c, Monitor *m) {
     detachstack(c);
     c->mon = m;
     c->tags = m->tagset[m->seltags]; /* assign tags of target monitor */
-    attach(c);
+    attachaside(c);
     attachstack(c);
     focus(NULL);
     arrange(NULL);
@@ -1667,6 +1694,17 @@ void setmfact(const Arg *arg) {
     arrange(selmon);
 }
 
+void
+setsmfact(const Arg *arg) {
+       float sf;
+       if(!arg || !selmon->lt[selmon->sellt]->arrange)
+               return;
+       sf = arg->sf < 1.0 ? arg->sf + selmon->smfact : arg->sf - 1.0;
+       if(sf < 0 || sf > 0.9)
+               return;
+       selmon->smfact = sf;
+       arrange(selmon);
+}
 void setup(void) {
     XSetWindowAttributes wa;
     sigchld(0);
@@ -1956,7 +1994,7 @@ Bool updategeom(void) {
                     m->clients = c->next;
                     detachstack(c);
                     c->mon = mons;
-                    attach(c);
+                    attachaside(c);
                     attachstack(c);
                 }
                 if(m == selmon)
@@ -2280,7 +2318,7 @@ void zoom(const Arg *arg) {
 }
 
 void tile(Monitor *m) {
-    unsigned int i, n, h, mw, my, ty;
+    unsigned int i, n, h, smh, mw, my, ty;
     Client *c;
     for(n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), n++);
     if(n == 0) return;
@@ -2293,9 +2331,26 @@ void tile(Monitor *m) {
             my += HEIGHT(c) + gap;
         }
         else {
-            h = (m->wh - ty) / (n - i);
+            /*h = (m->wh - ty) / (n - i);
             resize(c, m->wx + mw, m->wy + ty, m->ww - mw - (2*c->bw), h - (2*c->bw), False);
-            ty += HEIGHT(c) + gap;
+            ty += HEIGHT(c) + gap;*/
+                       smh = m->mh * m->smfact;
+                       if(!(nexttiled(c->next)))
+                               h = (m->wh - ty) / (n - i);
+                       else
+                               h = (m->wh - smh - ty) / (n - i);
+                       if(h < minwsz) {
+                               c->isfloating = True;
+                               XRaiseWindow(dpy, c->win);
+                               resize(c, m->mx + (m->mw / 2 - WIDTH(c) / 2), m->my + (m->mh / 2 - HEIGHT(c) / 2), m->ww - mw - (2*c->bw), h - (2*c->bw), False);
+                               ty -= HEIGHT(c) + gap;
+                           }
+                       else
+                               resize(c, m->wx + mw, m->wy + ty, m->ww - mw - (2*c->bw), h - (2*c->bw), False);
+                       if(!(nexttiled(c->next)))
+                               ty += HEIGHT(c) + smh;
+                       else
+                               ty += HEIGHT(c) + gap;
         }
 }
 
