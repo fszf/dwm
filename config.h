@@ -23,8 +23,8 @@ static const Bool resizehints = False;          /* true means respect size hints
 static const unsigned int minwsz = 20;          /* minimal height of a client for smfact */
 
 
-static const char font[] = "-misc-roboto-medium-r-*-*-28-*-*-*-*-*-*-*"; //-*-terminus-medium-r-*-*-20-*-*-*-*-*-*-*";
-static const char font2[] = "-*-terminus-medium-r-*-*-14-*-*-*-*-*-*-*"; 
+static const char font[] = "-misc-roboto-medium-r-*-*-26-*-*-*-*-*-*-*"; //-*-terminus-medium-r-*-*-20-*-*-*-*-*-*-*";
+static const char font2[] = "-*-terminus-medium-r-*-*-14-*-*-*-*-*-*-*";
 static const char colors[NUMCOLORS][ColLast][13] = {
     /* border    fg         bg */
     { "#333333", "#f8f8f2", "#1c2023" },        /* 01 - regular */
