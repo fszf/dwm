@@ -68,6 +68,7 @@ static const Rule rules[] = {
    { "Steam",                   NULL,       NULL,       1 << 3,       False,            True,        -1 },
    { "Calibre",                 NULL,       NULL,       1 << 3,       False,            True,        -1 },
    { "Gimp",                    NULL,       NULL,       1 << 3,       True,             True,        -1 },
+   { "Speedcrunch",             NULL,       NULL,       0,            True,             False,        -1 },
    { "Nwn",                     NULL,       NULL,       1 << 3,       True,             True,        -1 },
    { "FTL",                     NULL,       NULL,       1 << 3,       True,             True,        -1 },
    {  NULL,                     "mutt",     NULL,       1 << 4,       False,            False,       -1 },
@@ -76,6 +77,7 @@ static const Rule rules[] = {
    /*{ "mpv",                     NULL,       NULL,       1 << 2,       False,            False,       -1 },*/
    { "Thunderbird",             NULL,       NULL,       1 << 4,       False,            False,       -1 },
    { "Thunar",                  NULL,       NULL,       1 << 3,       True,             False,       -1 },
+   { "RoomKeyPMS™   The Villa Motel (Ver. 8.24.0.2)", NULL, NULL, 0, False, False, -1 },
 };
 
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
